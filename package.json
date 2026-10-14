@@ -1,0 +1,21 @@
+{
+  "name": "shopsphere",
+  "version": "1.0.0",
+  "description": "ShopSphere - Classic Premium Online Store",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx serve . -p 3000",
+    "start": "npx serve . -p 3000",
+    "serve": "npx serve . -p 3000"
+  },
+  "keywords": [
+    "ecommerce",
+    "shopsphere",
+    "classic"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "serve": "^14.2.4"
+  }
+}

@@ -1,0 +1,1809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopSphere - Classic Premium Online Store</title>
+    <meta name="description" content="ShopSphere is your premier classic online marketplace featuring top quality products, express delivery, and unbeatable deals in fashion, tech, home, beauty, and sports.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Notification Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Announcement Bar -->
+    <div class="announcement-bar" id="announcementBar">
+        <div class="announcement-container">
+            <div class="announcement-content">
+                <span class="badge-promo-classic">SPECIAL OFFER</span>
+                <p>⚡ Classic Launch Week! Get <strong>20% OFF</strong> + Free Shipping using code <span class="code-badge">CLASSIC20</span></p>
+            </div>
+            <button class="announcement-close" id="closeAnnouncement" aria-label="Close Promo">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Header & Navbar -->
+    <header class="navbar-header" id="navbarHeader">
+        <div class="nav-container">
+            <!-- Brand Logo -->
+            <a href="#home-page" class="brand-logo" data-page="home">
+                <div class="logo-icon-box">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                </div>
+                <div class="logo-text-group">
+                    <span class="logo-title">Shop<span class="logo-orange">Sphere</span></span>
+                    <span class="logo-tagline">CLASSIC COLLECTION</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="nav-menu" aria-label="Main Navigation">
+                <ul class="nav-list">
+                    <li><a href="#home-page" class="nav-link active" data-page="home"><i class="fa-solid fa-house nav-icon"></i> Home</a></li>
+                    <li><a href="#products-page" class="nav-link" data-page="products"><i class="fa-solid fa-box-open nav-icon"></i> Products</a></li>
+                    <li><a href="#categories-page" class="nav-link" data-page="categories"><i class="fa-solid fa-layer-group nav-icon"></i> Categories</a></li>
+                    <li><a href="#about-page" class="nav-link" data-page="about"><i class="fa-solid fa-circle-info nav-icon"></i> About</a></li>
+                    <li><a href="#contact-page" class="nav-link" data-page="contact"><i class="fa-solid fa-paper-plane nav-icon"></i> Contact</a></li>
+                </ul>
+            </nav>
+
+            <!-- Navbar Right Actions -->
+            <div class="nav-actions">
+                <!-- Search Trigger -->
+                <button class="action-circle search-trigger" id="searchToggle" aria-label="Search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+
+                <!-- Wishlist Trigger -->
+                <button class="action-circle" id="wishlistToggle" aria-label="Wishlist">
+                    <i class="fa-regular fa-heart"></i>
+                    <span class="badge-count count-yellow" id="wishlistCount">0</span>
+                </button>
+
+                <!-- Cart Trigger -->
+                <button class="action-circle cart-btn-active" id="cartToggle" aria-label="Cart">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="badge-count count-orange" id="cartCount">0</span>
+                </button>
+
+                <!-- Login / User Profile Container -->
+                <div id="navAuthContainer">
+                    <button class="btn-classic-login" id="loginModalToggle">
+                        <i class="fa-solid fa-user-circle"></i>
+                        <span>Login</span>
+                    </button>
+                </div>
+
+                <!-- Mobile Hamburger Button -->
+                <button class="mobile-toggle" id="mobileToggle" aria-label="Menu Toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Search Bar Dropdown -->
+        <div class="search-modal-bar" id="searchModalBar">
+            <div class="search-bar-inner">
+                <i class="fa-solid fa-magnifying-glass search-main-icon"></i>
+                <input type="text" id="globalSearchInput" placeholder="Search products, categories, brands..." autocomplete="off">
+                <button class="search-close-btn" id="searchCloseBtn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+        </div>
+
+        <!-- Mobile Side Drawer -->
+        <div class="mobile-drawer" id="mobileDrawer">
+            <div class="drawer-header">
+                <div class="brand-logo">
+                    <div class="logo-icon-box small">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                    </div>
+                    <span class="logo-title">Shop<span class="logo-orange">Sphere</span></span>
+                </div>
+                <button class="drawer-close" id="drawerClose"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <ul class="drawer-menu">
+                <li><a href="#home-page" class="drawer-link active" data-page="home"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="#products-page" class="drawer-link" data-page="products"><i class="fa-solid fa-box-open"></i> Products</a></li>
+                <li><a href="#categories-page" class="drawer-link" data-page="categories"><i class="fa-solid fa-layer-group"></i> Categories</a></li>
+                <li><a href="#about-page" class="drawer-link" data-page="about"><i class="fa-solid fa-circle-info"></i> About Us</a></li>
+                <li><a href="#contact-page" class="drawer-link" data-page="contact"><i class="fa-solid fa-paper-plane"></i> Contact Us</a></li>
+            </ul>
+            <div class="drawer-footer">
+                <button class="btn-classic-primary full-width" id="drawerLoginBtn">
+                    <i class="fa-solid fa-right-to-bracket"></i> Login / Register
+                </button>
+            </div>
+        </div>
+        <div class="drawer-backdrop" id="drawerBackdrop"></div>
+    </header>
+
+    <!-- MAIN PAGE CONTENT (SINGLE PAGE VIEW SWITCHER) -->
+    <main>
+        <!-- ================= PAGE 1: HOME PAGE ================= -->
+        <div class="page-view active" id="home-page">
+            <!-- HERO SECTION -->
+            <section class="hero-section">
+                <div class="hero-container">
+                    <!-- Left Hero Content -->
+                    <div class="hero-content">
+                        <div class="hero-pill-badge">
+                            <span class="pill-dot green"></span>
+                            <span class="pill-label">NEW CLASSIC COLLECTION 2026</span>
+                        </div>
+
+                        <h1 class="hero-heading">
+                            Discover Everything You Love, <span class="text-highlight-orange">All in One Place</span>
+                        </h1>
+
+                        <p class="hero-subtext">
+                            Explore thousands of premium handpicked products. Enjoy instant express shipping, 100% buyer protection, and unbeatable daily classic deals.
+                        </p>
+
+                        <div class="hero-btn-group">
+                            <a href="#products-page" class="btn-classic-orange" data-page="products">
+                                <span>Shop Now</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                            <a href="#categories-page" class="btn-classic-yellow" data-page="categories">
+                                <i class="fa-solid fa-compass"></i>
+                                <span>Explore Categories</span>
+                            </a>
+                        </div>
+
+                        <!-- Hero Stats -->
+                        <div class="hero-stats-row">
+                            <div class="stat-box">
+                                <span class="stat-num text-orange">50k+</span>
+                                <span class="stat-lbl">Happy Shoppers</span>
+                            </div>
+                            <div class="stat-sep"></div>
+                            <div class="stat-box">
+                                <span class="stat-num text-yellow">4.9 ★</span>
+                                <span class="stat-lbl">Top Rated</span>
+                            </div>
+                            <div class="stat-sep"></div>
+                            <div class="stat-box">
+                                <span class="stat-num text-green">24/7</span>
+                                <span class="stat-lbl">Live Support</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Hero Visual -->
+                    <div class="hero-visual-card-frame">
+                        <div class="stitch-border-wrapper">
+                            <div class="hero-img-box">
+                                <img src="assets/hero-classic.jpg" alt="ShopSphere Classic Collection" class="hero-img" onerror="handleImgError(this)">
+                            </div>
+
+                            <!-- Floating Badge 1: Top Rating -->
+                            <div class="floating-card badge-top">
+                                <div class="badge-icon-box yellow">
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+                                <div>
+                                    <div class="badge-title-sm">Top Rated</div>
+                                    <div class="badge-desc">4.9 Stars (3,200+ Reviews)</div>
+                                </div>
+                            </div>
+
+                            <!-- Floating Badge 2: Express Delivery -->
+                            <div class="floating-card badge-middle">
+                                <div class="badge-icon-box green">
+                                    <i class="fa-solid fa-truck-fast"></i>
+                                </div>
+                                <div>
+                                    <div class="badge-title-sm">Free Express Shipping</div>
+                                    <div class="badge-desc">On orders over ₹999</div>
+                                </div>
+                            </div>
+
+                            <!-- Floating Badge 3: Discount Alert -->
+                            <div class="floating-card badge-bottom">
+                                <div class="badge-icon-box orange">
+                                    <i class="fa-solid fa-tag"></i>
+                                </div>
+                                <div>
+                                    <div class="badge-title-sm">Save Up To 50%</div>
+                                    <div class="badge-desc">Limited Time Offers</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+
+            <!-- SINGLE CONSOLIDATED FEATURED PRODUCTS SECTION -->
+            <section class="featured-products-section" id="featured-products">
+                <div class="section-container">
+                    <div class="section-header flex-header">
+                        <div>
+                            <span class="section-subtitle-tag orange">CURATED FOR YOU</span>
+                            <h2 class="section-title">Featured Products</h2>
+                            <p class="section-desc">Handpicked premium items with top customer ratings and exclusive discounts</p>
+                        </div>
+                        <a href="#products-page" class="btn-outline-classic" data-page="products">
+                            <span>View All Products</span> <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+
+                    <div class="featured-products-grid" id="homeFeaturedProductsGrid">
+                        <!-- Dynamically populated from PRODUCTS dataset by script.js -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- TRUST FEATURES BAR -->
+            <section class="trust-features-section">
+                <div class="section-container">
+                    <div class="trust-grid">
+                        <div class="trust-card">
+                            <div class="trust-icon orange"><i class="fa-solid fa-truck-ramp-box"></i></div>
+                            <div>
+                                <h4>Free Worldwide Shipping</h4>
+                                <p>On all orders above ₹999</p>
+                            </div>
+                        </div>
+                        <div class="trust-card">
+                            <div class="trust-icon green"><i class="fa-solid fa-shield-halved"></i></div>
+                            <div>
+                                <h4>100% Buyer Protection</h4>
+                                <p>30-Day money back guarantee</p>
+                            </div>
+                        </div>
+                        <div class="trust-card">
+                            <div class="trust-icon yellow"><i class="fa-solid fa-award"></i></div>
+                            <div>
+                                <h4>Curated Quality</h4>
+                                <p>Handpicked authentic items</p>
+                            </div>
+                        </div>
+                        <div class="trust-card">
+                            <div class="trust-icon orange"><i class="fa-solid fa-headset"></i></div>
+                            <div>
+                                <h4>Dedicated Support</h4>
+                                <p>24/7 Live customer assistance</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- BANNER PROMO PROMOTION -->
+            <section class="promo-banner-section">
+                <div class="section-container">
+                    <div class="promo-card-stitch">
+                        <div class="promo-content">
+                            <span class="promo-pill">LIMITED TIME DEAL</span>
+                            <h2>Upgrade Your Lifestyle with <span class="text-orange">Classic Essentials</span></h2>
+                            <p>Get up to <strong>40% OFF</strong> on all Tech & Fashion accessories. Free gift box included with every order over ₹4,999.</p>
+                            <a href="#products-page" class="btn-classic-green" data-page="products">
+                                <i class="fa-solid fa-bag-shopping"></i> Claim Discount Now
+                            </a>
+                        </div>
+                        <div class="promo-badge-circle">
+                            <span>SAVE</span>
+                            <strong>40%</strong>
+                            <span>OFF</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= PAGE 2: PRODUCTS PAGE ================= -->
+        <div class="page-view" id="products-page">
+
+
+            <section class="products-catalog-section">
+                <div class="section-container">
+                    <!-- Products Filter Toolbar -->
+                    <div class="catalog-toolbar">
+                        <!-- Category Filter Pills -->
+                        <div class="filter-pills" id="categoryFilterPills">
+                            <button class="pill-btn active" data-cat="all">All Items</button>
+                            <button class="pill-btn" data-cat="tech">Tech & Gadgets</button>
+                            <button class="pill-btn" data-cat="fashion">Fashion & Apparel</button>
+                            <button class="pill-btn" data-cat="home">Home & Living</button>
+                            <button class="pill-btn" data-cat="beauty">Beauty & Care</button>
+                            <button class="pill-btn" data-cat="sports">Sports & Travel</button>
+                        </div>
+
+                        <!-- Sort Dropdown & Search -->
+                        <div class="catalog-controls">
+                            <div class="catalog-search-box">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                <input type="text" id="catalogSearchInput" placeholder="Filter products...">
+                            </div>
+                            <div class="catalog-sort-box">
+                                <label for="sortSelect"><i class="fa-solid fa-sort"></i></label>
+                                <select id="sortSelect">
+                                    <option value="featured">Sort by: Featured</option>
+                                    <option value="price-low">Price: Low to High</option>
+                                    <option value="price-high">Price: High to Low</option>
+                                    <option value="rating">Highest Rated</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Products Grid -->
+                    <div class="products-grid" id="catalogProductsGrid">
+                        <!-- Populated by JS -->
+                    </div>
+
+                    <!-- Load More Pagination Button -->
+                    <div class="load-more-wrapper" id="loadMoreContainer" style="text-align: center; margin-top: 40px; display: none;">
+                        <button class="btn-classic-yellow" id="loadMoreBtn" style="padding: 14px 36px; font-weight: 700; font-size: 1rem;">
+                            <i class="fa-solid fa-angles-down"></i> Load More Products (<span id="loadMoreRemainingCount">0</span> remaining)
+                        </button>
+                    </div>
+
+                    <div class="no-products-msg hidden" id="noProductsMsg">
+                        <i class="fa-solid fa-box-open empty-icon"></i>
+                        <h3>No matching products found</h3>
+                        <p>Try searching for a different item or clear your active filters.</p>
+                        <button class="btn-classic-orange" id="resetFiltersBtn">Reset Filters</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= PAGE: PRODUCT DETAIL PAGE ================= -->
+        <div class="page-view" id="product-detail-page">
+            <section class="product-detail-section">
+                <div class="section-container" style="padding-top: 32px; padding-bottom: 80px;">
+                    <div id="productDetailContainer">
+                        <!-- Dynamically populated by JS -->
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= PAGE 3: CATEGORIES PAGE ================= -->
+        <div class="page-view" id="categories-page">
+
+
+            <section class="categories-detail-section">
+                <div class="section-container">
+                    <div class="categories-large-grid" id="fullCategoriesGrid">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= PAGE 4: ABOUT PAGE ================= -->
+        <div class="page-view" id="about-page">
+
+
+            <section class="about-content-section">
+                <div class="section-container">
+                    <div class="about-grid">
+                        <div class="about-text-box">
+                            <span class="section-subtitle-tag orange">SINCE 2020</span>
+                            <h2>We Craft Premium Classic E-Commerce Experiences</h2>
+                            <p>Founded with a simple mission: to connect shoppers with high-quality, verified lifestyle products while delivering top-tier customer service and lightning-fast shipping.</p>
+                            <p>From modern electronics and timeless fashion to organic beauty and home decor, every product on ShopSphere passes through strict quality inspections.</p>
+                            
+                            <div class="about-check-list">
+                                <div class="check-item"><i class="fa-solid fa-circle-check text-green"></i> 100% Authentic Product Guarantee</div>
+                                <div class="check-item"><i class="fa-solid fa-circle-check text-orange"></i> Eco-Friendly & Sustainable Packaging</div>
+                                <div class="check-item"><i class="fa-solid fa-circle-check text-yellow"></i> 30-Day Hassle-Free Returns & Refunds</div>
+                            </div>
+                        </div>
+                        <div class="about-stats-card-group">
+                            <div class="about-stat-card orange-border">
+                                <i class="fa-solid fa-users stat-card-icon text-orange"></i>
+                                <h3>100k+</h3>
+                                <p>Worldwide Customers</p>
+                            </div>
+                            <div class="about-stat-card yellow-border">
+                                <i class="fa-solid fa-globe stat-card-icon text-yellow"></i>
+                                <h3>45+</h3>
+                                <p>Countries Served</p>
+                            </div>
+                            <div class="about-stat-card green-border">
+                                <i class="fa-solid fa-star stat-card-icon text-green"></i>
+                                <h3>99.4%</h3>
+                                <p>Positive Feedback</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= PAGE 5: CONTACT PAGE ================= -->
+        <div class="page-view" id="contact-page">
+
+
+            <section class="contact-section">
+                <div class="section-container">
+                    <div class="contact-grid">
+                        <!-- Contact Info Cards -->
+                        <div class="contact-info-column">
+                            <div class="contact-card orange">
+                                <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+                                <div>
+                                    <h4>Call Us Direct</h4>
+                                    <p>+1 (800) 555-SPHERE</p>
+                                    <span class="info-subtext">Mon - Sun: 8:00 AM - 10:00 PM</span>
+                                </div>
+                            </div>
+
+                            <div class="contact-card green">
+                                <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+                                <div>
+                                    <h4>Email Support</h4>
+                                    <p>support@shopsphere.com</p>
+                                    <span class="info-subtext">Fast response within 2 hours</span>
+                                </div>
+                            </div>
+
+                            <div class="contact-card yellow">
+                                <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+                                <div>
+                                    <h4>Global Headquarters</h4>
+                                    <p>742 Evergreen Terrace, Suite 400</p>
+                                    <span class="info-subtext">San Francisco, CA 94107</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contact Form -->
+                        <div class="contact-form-card">
+                            <h3>Send Us A Message</h3>
+                            <p>Fill out the form below and our team will get back to you promptly.</p>
+                            <form id="contactForm">
+                                <div class="form-row-2">
+                                    <div class="form-group">
+                                        <label for="contactName">Your Name *</label>
+                                        <input type="text" id="contactName" required placeholder="John Doe">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contactEmail">Email Address *</label>
+                                        <input type="email" id="contactEmail" required placeholder="john@example.com">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contactSubject">Subject</label>
+                                    <input type="text" id="contactSubject" placeholder="Order inquiry, product question, etc.">
+                                </div>
+                                <div class="form-group">
+                                    <label for="contactMessage">Message *</label>
+                                    <textarea id="contactMessage" rows="5" required placeholder="Type your message here..."></textarea>
+                                </div>
+                                <button type="submit" class="btn-classic-orange full-width">
+                                    <i class="fa-solid fa-paper-plane"></i> Send Message
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= PAGE 6: ADMIN DASHBOARD ================= -->
+        <div class="page-view" id="admin-dashboard-page">
+            <section class="page-header-banner">
+                <div class="section-container">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+                        <div>
+                            <span class="section-subtitle-tag orange">ADMIN CONTROL PANEL</span>
+                            <h1 class="page-header-title">System Admin Dashboard</h1>
+                            <p class="page-header-desc">Full system overview, user management, seller approvals, and global platform analytics.</p>
+                        </div>
+                        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                            <button class="btn-classic-orange" id="btnAdminHeaderAddProduct"><i class="fa-solid fa-plus"></i> Add Product</button>
+                            <button class="btn-classic-yellow" id="btnAdminHeaderAddUser"><i class="fa-solid fa-user-plus"></i> Add User</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="admin-panel-section" style="padding: 40px 0 100px;">
+                <div class="section-container">
+                    <!-- Admin Navigation Tabs -->
+                    <div class="admin-tabs-nav">
+                        <button class="admin-tab-btn active" data-tab="overview">
+                            <i class="fa-solid fa-chart-line"></i> <span>1. Overview</span>
+                        </button>
+                        <button class="admin-tab-btn" data-tab="users">
+                            <i class="fa-solid fa-users"></i> <span>2. Users</span>
+                        </button>
+                        <button class="admin-tab-btn" data-tab="sellers">
+                            <i class="fa-solid fa-store"></i> <span>3. Sellers</span>
+                        </button>
+                        <button class="admin-tab-btn" data-tab="products">
+                            <i class="fa-solid fa-box-open"></i> <span>4. Products</span>
+                        </button>
+                        <button class="admin-tab-btn" data-tab="orders">
+                            <i class="fa-solid fa-cart-shopping"></i> <span>5. Orders</span>
+                        </button>
+                        <button class="admin-tab-btn" data-tab="activity">
+                            <i class="fa-solid fa-clock-rotate-left"></i> <span>6. Activities</span>
+                        </button>
+                        <button class="admin-tab-btn" data-tab="reports">
+                            <i class="fa-solid fa-square-poll-vertical"></i> <span>7. Reports</span>
+                        </button>
+                    </div>
+
+                    <!-- TAB 1: OVERVIEW -->
+                    <div class="admin-tab-content active" id="adminTabOverview">
+                        <!-- Stat Counter Cards -->
+                        <div class="admin-stats-grid">
+                            <div class="admin-stat-card card-orange">
+                                <div class="stat-icon-box"><i class="fa-solid fa-users"></i></div>
+                                <div>
+                                    <span class="stat-lbl">Total Users</span>
+                                    <h2 class="stat-val" id="statTotalUsers">0</h2>
+                                    <span class="stat-subtext" id="statUserBreakdown">Buyers & Sellers</span>
+                                </div>
+                            </div>
+
+                            <div class="admin-stat-card card-yellow">
+                                <div class="stat-icon-box"><i class="fa-solid fa-store"></i></div>
+                                <div>
+                                    <span class="stat-lbl">Active Sellers</span>
+                                    <h2 class="stat-val" id="statActiveSellers">0</h2>
+                                    <span class="stat-subtext">Approved Merchants</span>
+                                </div>
+                            </div>
+
+                            <div class="admin-stat-card card-blue">
+                                <div class="stat-icon-box"><i class="fa-solid fa-boxes-stacked"></i></div>
+                                <div>
+                                    <span class="stat-lbl">Total Products</span>
+                                    <h2 class="stat-val" id="statTotalProducts">0</h2>
+                                    <span class="stat-subtext">Across 5 Departments</span>
+                                </div>
+                            </div>
+
+                            <div class="admin-stat-card card-green">
+                                <div class="stat-icon-box"><i class="fa-solid fa-indian-rupee-sign"></i></div>
+                                <div>
+                                    <span class="stat-lbl">Total Revenue</span>
+                                    <h2 class="stat-val" id="statTotalSales">₹0</h2>
+                                    <span class="stat-subtext" id="statTotalOrders">0 Orders Placed</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Overview Split Grid (Recent Orders & Activity Log) -->
+                        <div class="admin-overview-grid" style="display: grid; grid-template-columns: 2fr 1fr; gap: 30px; margin-top: 30px;">
+                            <div class="admin-card-box">
+                                <div class="card-box-header">
+                                    <h3><i class="fa-solid fa-bag-shopping text-orange"></i> Recent Orders</h3>
+                                    <button class="btn-sm-link" id="btnViewAllOrdersTab">View All Orders →</button>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="admin-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Order ID</th>
+                                                <th>Customer</th>
+                                                <th>Amount</th>
+                                                <th>Status</th>
+                                                <th>Date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="overviewRecentOrdersBody">
+                                            <!-- Populated dynamically -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="admin-card-box">
+                                <div class="card-box-header">
+                                    <h3><i class="fa-solid fa-bolt text-yellow"></i> Recent Activity</h3>
+                                </div>
+                                <div class="activity-feed-list" id="overviewRecentActivityList">
+                                    <!-- Populated dynamically -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 2: USER MANAGEMENT -->
+                    <div class="admin-tab-content" id="adminTabUsers">
+                        <div class="admin-card-box">
+                            <div class="admin-filter-bar">
+                                <div class="filter-search-input">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                    <input type="text" id="adminUserSearchInput" placeholder="Search users by name, email, phone...">
+                                </div>
+                                <div class="filter-select-group">
+                                    <select id="adminUserRoleFilter">
+                                        <option value="ALL">All Roles</option>
+                                        <option value="BUYER">Buyers</option>
+                                        <option value="SELLER">Sellers</option>
+                                        <option value="ADMIN">Admins</option>
+                                    </select>
+                                    <button class="btn-classic-orange" id="btnOpenAddUserModal"><i class="fa-solid fa-plus"></i> Add User</button>
+                                </div>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="admin-table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>User Name</th>
+                                            <th>Email</th>
+                                            <th>Phone</th>
+                                            <th>Role</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="adminUsersTableBody">
+                                        <!-- Populated dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 3: SELLER MANAGEMENT -->
+                    <div class="admin-tab-content" id="adminTabSellers">
+                        <div class="admin-card-box">
+                            <div class="admin-filter-bar">
+                                <div class="filter-search-input">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                    <input type="text" id="adminSellerSearchInput" placeholder="Search store name, email...">
+                                </div>
+                                <div class="filter-select-group">
+                                    <select id="adminSellerStatusFilter">
+                                        <option value="ALL">All Status</option>
+                                        <option value="APPROVED">Approved</option>
+                                        <option value="PENDING">Pending Approval</option>
+                                        <option value="REJECTED">Rejected</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="admin-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Store Name</th>
+                                            <th>Seller Email</th>
+                                            <th>Category</th>
+                                            <th>Products</th>
+                                            <th>Total Revenue</th>
+                                            <th>Approval Status</th>
+                                            <th>Account Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="adminSellersTableBody">
+                                        <!-- Populated dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 4: PRODUCT MANAGEMENT -->
+                    <div class="admin-tab-content" id="adminTabProducts">
+                        <div class="admin-card-box">
+                            <div class="admin-filter-bar">
+                                <div class="filter-search-input">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                    <input type="text" id="adminProductSearchInput" placeholder="Search product name, category...">
+                                </div>
+                                <div class="filter-select-group">
+                                    <select id="adminProductCategoryFilter">
+                                        <option value="ALL">All Categories</option>
+                                        <option value="Tech & Gadgets">Tech & Gadgets</option>
+                                        <option value="Fashion & Apparel">Fashion & Apparel</option>
+                                        <option value="Home & Living">Home & Living</option>
+                                        <option value="Beauty & Care">Beauty & Care</option>
+                                        <option value="Sports & Travel">Sports & Travel</option>
+                                    </select>
+                                    <button class="btn-classic-orange" id="btnOpenAddProductModal"><i class="fa-solid fa-plus"></i> Add Product</button>
+                                </div>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="admin-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Category</th>
+                                            <th>Price (INR)</th>
+                                            <th>Old Price</th>
+                                            <th>Stock</th>
+                                            <th>Rating</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="adminProductsTableBody">
+                                        <!-- Populated dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 5: ORDER MANAGEMENT -->
+                    <div class="admin-tab-content" id="adminTabOrders">
+                        <div class="admin-card-box">
+                            <div class="admin-filter-bar">
+                                <div class="filter-search-input">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                    <input type="text" id="adminOrderSearchInput" placeholder="Search Order ID, Customer Email...">
+                                </div>
+                                <div class="filter-select-group">
+                                    <select id="adminOrderStatusFilter">
+                                        <option value="ALL">All Order Status</option>
+                                        <option value="Placed">Placed / Pending</option>
+                                        <option value="Confirmed">Confirmed</option>
+                                        <option value="Shipped">Shipped</option>
+                                        <option value="Out for Delivery">Out for Delivery</option>
+                                        <option value="Delivered">Delivered</option>
+                                        <option value="Cancelled">Cancelled</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="admin-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Order #</th>
+                                            <th>Customer Name / Email</th>
+                                            <th>Date</th>
+                                            <th>Items</th>
+                                            <th>Total Price</th>
+                                            <th>Payment Method</th>
+                                            <th>Status</th>
+                                            <th>Update Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="adminOrdersTableBody">
+                                        <!-- Populated dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 6: SYSTEM ACTIVITY MONITORING -->
+                    <div class="admin-tab-content" id="adminTabActivity">
+                        <div class="admin-card-box">
+                            <div class="card-box-header flex-header">
+                                <div>
+                                    <h3><i class="fa-solid fa-list-check text-orange"></i> Activity & Audit Logs</h3>
+                                    <p style="color: var(--text-muted); font-size: 0.9rem;">Real-time system events, order triggers, and administrative actions.</p>
+                                </div>
+                                <select id="adminLogTypeFilter" style="padding: 8px 14px; border-radius: var(--radius-md); border: 2px solid var(--border-color);">
+                                    <option value="ALL">All Event Types</option>
+                                    <option value="admin">Admin Actions</option>
+                                    <option value="user">User Events</option>
+                                    <option value="order">Order Events</option>
+                                    <option value="product">Product Events</option>
+                                </select>
+                            </div>
+
+                            <div class="activity-timeline-container" id="adminActivityLogTimeline">
+                                <!-- Populated dynamically -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 7: REPORTS & ANALYTICS -->
+                    <div class="admin-tab-content" id="adminTabReports">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px;">
+                            <div class="admin-card-box">
+                                <h3><i class="fa-solid fa-chart-column text-orange"></i> Monthly Sales Breakdown (2026)</h3>
+                                <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 20px;">Platform revenue performance by month</p>
+                                <div class="monthly-sales-chart" id="adminMonthlySalesChart">
+                                    <!-- Visual Bar Chart populated dynamically -->
+                                </div>
+                            </div>
+
+                            <div class="admin-card-box">
+                                <h3><i class="fa-solid fa-fire text-yellow"></i> Top-Selling Products</h3>
+                                <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 20px;">Ranked by customer orders and ratings</p>
+                                <div class="top-products-list" id="adminTopProductsList">
+                                    <!-- Populated dynamically -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="admin-card-box">
+                            <h3><i class="fa-solid fa-store text-green"></i> Seller Revenue & Performance</h3>
+                            <div class="table-responsive" style="margin-top: 15px;">
+                                <table class="admin-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Seller / Store Name</th>
+                                            <th>Category</th>
+                                            <th>Listed Items</th>
+                                            <th>Average Rating</th>
+                                            <th>Total Revenue Generated</th>
+                                            <th>Platform Share (10%)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="adminSellerPerformanceTableBody">
+                                        <!-- Populated dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= PAGE 7: SELLER DASHBOARD ================= -->
+        <div class="page-view" id="seller-dashboard-page">
+            <section class="page-header-banner">
+                <div class="section-container">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+                        <div>
+                            <span class="section-subtitle-tag yellow">MERCHANT DASHBOARD</span>
+                            <h1 class="page-header-title" id="sellerStoreTitle">Seller Merchant Panel</h1>
+                            <p class="page-header-desc" id="sellerStoreSubtext">Manage your store listings, inventory, and track your sales performance.</p>
+                        </div>
+                        <div>
+                            <button class="btn-classic-orange" id="btnSellerOpenAddProductModal"><i class="fa-solid fa-plus"></i> List New Product</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="seller-panel-section" style="padding: 40px 0 100px;">
+                <div class="section-container">
+                    <!-- Seller Details Banner Card -->
+                    <div class="admin-card-box" style="margin-bottom: 30px; border-left: 6px solid var(--yellow-primary);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+                            <div>
+                                <h3 id="sellerBannerStoreName" style="font-size: 1.3rem;"><i class="fa-solid fa-store text-yellow"></i> My Merchant Store</h3>
+                                <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 8px; font-size: 0.9rem; color: var(--text-secondary);">
+                                    <span><i class="fa-solid fa-id-card text-orange"></i> GSTIN: <strong id="sellerBannerGst">22AAAAA0000A1Z5</strong></span>
+                                    <span><i class="fa-solid fa-layer-group text-yellow"></i> Category: <strong id="sellerBannerCategory">Tech & Gadgets</strong></span>
+                                    <span><i class="fa-solid fa-envelope"></i> Email: <strong id="sellerBannerEmail">seller@shopsphere.com</strong></span>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="badge-status approved" id="sellerBannerStatusBadge">APPROVED SELLER</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Seller Metrics Grid -->
+                    <div class="admin-stats-grid" style="margin-bottom: 30px;">
+                        <div class="admin-stat-card card-yellow">
+                            <div class="stat-icon-box"><i class="fa-solid fa-box-open"></i></div>
+                            <div>
+                                <span class="stat-lbl">My Products</span>
+                                <h2 class="stat-val" id="sellerStatProducts">0</h2>
+                                <span class="stat-subtext">Active Listings</span>
+                            </div>
+                        </div>
+
+                        <div class="admin-stat-card card-green">
+                            <div class="stat-icon-box"><i class="fa-solid fa-indian-rupee-sign"></i></div>
+                            <div>
+                                <span class="stat-lbl">Total Sales</span>
+                                <h2 class="stat-val" id="sellerStatSales">₹0</h2>
+                                <span class="stat-subtext">Gross Revenue</span>
+                            </div>
+                        </div>
+
+                        <div class="admin-stat-card card-orange">
+                            <div class="stat-icon-box"><i class="fa-solid fa-star"></i></div>
+                            <div>
+                                <span class="stat-lbl">Store Rating</span>
+                                <h2 class="stat-val" id="sellerStatRating">4.8 ★</h2>
+                                <span class="stat-subtext">Customer Satisfaction</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Seller Header Navigation Tabs -->
+                    <div class="admin-header-tabs" id="sellerHeaderTabs">
+                        <button class="admin-tab-btn active" data-seller-tab="products">
+                            <i class="fa-solid fa-boxes-stacked"></i> Product Listings
+                        </button>
+                        <button class="admin-tab-btn" data-seller-tab="orders">
+                            <i class="fa-solid fa-receipt"></i> Order Processing
+                        </button>
+                        <button class="admin-tab-btn" data-seller-tab="inventory">
+                            <i class="fa-solid fa-chart-pie"></i> Inventory Overview
+                        </button>
+                        <button class="admin-tab-btn" data-seller-tab="performance">
+                            <i class="fa-solid fa-chart-line"></i> Sales Performance
+                        </button>
+                    </div>
+
+                    <!-- SELLER TAB 1: PRODUCT LISTINGS -->
+                    <div class="seller-tab-content active" id="sellerTabProducts">
+                        <div class="admin-card-box">
+                            <div class="card-box-header flex-header">
+                                <div>
+                                    <h3><i class="fa-solid fa-boxes-stacked text-orange"></i> My Listed Products</h3>
+                                    <p style="color: var(--text-muted); font-size: 0.88rem;">Add, edit or update stock for your products on ShopSphere catalog.</p>
+                                </div>
+                                <button class="btn-classic-orange" id="btnSellerAddProduct"><i class="fa-solid fa-plus"></i> Add Product</button>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="admin-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Category</th>
+                                            <th>Price (INR ₹)</th>
+                                            <th>Stock Quantity</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="sellerProductsTableBody">
+                                        <!-- Populated dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SELLER TAB 2: ORDER PROCESSING -->
+                    <div class="seller-tab-content" id="sellerTabOrders" style="display: none;">
+                        <div class="admin-card-box">
+                            <div class="card-box-header">
+                                <h3><i class="fa-solid fa-receipt text-orange"></i> Orders for My Merchant Store</h3>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="admin-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Order #</th>
+                                            <th>Customer</th>
+                                            <th>Date</th>
+                                            <th>Amount</th>
+                                            <th>Order Status</th>
+                                            <th>Fulfill Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="sellerOrdersTableBody">
+                                        <!-- Dynamic -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SELLER TAB 3: INVENTORY OVERVIEW (GRAPHICAL & ALERTS) -->
+                    <div class="seller-tab-content" id="sellerTabInventory" style="display: none;">
+                        <div id="sellerLowStockAlertContainer" style="margin-bottom: 24px;">
+                            <!-- Dynamic Alert Boxes -->
+                        </div>
+
+                        <div class="admin-card-box">
+                            <div class="card-box-header">
+                                <h3><i class="fa-solid fa-chart-pie text-green"></i> Inventory Stock Levels & Capacity</h3>
+                            </div>
+                            <div id="sellerInventoryGraphicalContainer" style="display: grid; gap: 16px; margin-top: 20px;">
+                                <!-- Graphical progress bars -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SELLER TAB 4: SALES PERFORMANCE -->
+                    <div class="seller-tab-content" id="sellerTabPerformance" style="display: none;">
+                        <div class="admin-card-box" style="margin-bottom: 30px;">
+                            <div class="card-box-header">
+                                <h3><i class="fa-solid fa-chart-line text-orange"></i> Monthly Sales Performance</h3>
+                            </div>
+                            <div class="chart-container-box" style="margin-top: 20px;">
+                                <div class="monthly-sales-chart bar-chart-flex" id="sellerSalesPerformanceChart">
+                                    <!-- Dynamic visual sales bars -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="admin-card-box">
+                            <div class="card-box-header">
+                                <h3><i class="fa-solid fa-fire text-yellow"></i> Top Selling Store Products</h3>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="admin-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Product Name</th>
+                                            <th>Category</th>
+                                            <th>Price</th>
+                                            <th>Units Sold</th>
+                                            <th>Total Revenue</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="sellerTopProductsTableBody">
+                                        <!-- Dynamic -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= PAGE 8: BUYER DASHBOARD ================= -->
+        <div class="page-view" id="buyer-dashboard-page">
+
+            
+            <section style="padding: 40px 0 100px; background: var(--bg-primary);">
+                <div class="section-container">
+                    <!-- Quick Stats Row -->
+                    <div class="admin-stats-grid" style="grid-template-columns: repeat(4, 1fr); margin-bottom: 30px;">
+                        <div class="admin-stat-card border-green">
+                            <div class="stat-icon-box green"><i class="fa-solid fa-bag-shopping"></i></div>
+                            <div class="stat-info">
+                                <span class="stat-label">Total Orders</span>
+                                <h3 class="stat-value" id="buyerTotalOrdersCount">0</h3>
+                            </div>
+                        </div>
+                        <div class="admin-stat-card border-orange">
+                            <div class="stat-icon-box orange"><i class="fa-solid fa-heart"></i></div>
+                            <div class="stat-info">
+                                <span class="stat-label">Wishlist Items</span>
+                                <h3 class="stat-value" id="buyerWishlistCount">0</h3>
+                            </div>
+                        </div>
+                        <div class="admin-stat-card border-yellow">
+                            <div class="stat-icon-box yellow"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                            <div class="stat-info">
+                                <span class="stat-label">Viewed Products</span>
+                                <h3 class="stat-value" id="buyerHistoryCount">0</h3>
+                            </div>
+                        </div>
+                        <div class="admin-stat-card border-green">
+                            <div class="stat-icon-box green"><i class="fa-solid fa-location-dot"></i></div>
+                            <div class="stat-info">
+                                <span class="stat-label">Saved Addresses</span>
+                                <h3 class="stat-value" id="buyerAddressCount">0</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Buyer Header Navigation Tabs -->
+                    <div class="admin-header-tabs" id="buyerHeaderTabs">
+                        <button class="admin-tab-btn active" data-tab="overview">
+                            <i class="fa-solid fa-id-card"></i> Account Overview
+                        </button>
+                        <button class="admin-tab-btn" data-tab="orders">
+                            <i class="fa-solid fa-box-open"></i> Order History & Tracking
+                        </button>
+                        <button class="admin-tab-btn" data-tab="wishlist">
+                            <i class="fa-solid fa-heart"></i> Wishlist & Price Tracker
+                        </button>
+                        <button class="admin-tab-btn" data-tab="history">
+                            <i class="fa-solid fa-clock-rotate-left"></i> Browsing History
+                        </button>
+                    </div>
+
+                    <!-- TAB 1: ACCOUNT OVERVIEW -->
+                    <div class="buyer-tab-content active" id="buyerTabOverview">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                            <!-- Personal Profile & Password Shortcut -->
+                            <div class="admin-card-box">
+                                <div class="card-box-header">
+                                    <h3><i class="fa-solid fa-user text-orange"></i> Personal Profile</h3>
+                                    <button class="btn-sm-link" onclick="switchPage('profile')">Edit Profile →</button>
+                                </div>
+                                <div id="buyerProfileSummary" style="padding-top: 10px;">
+                                    <!-- Dynamic content -->
+                                </div>
+                            </div>
+
+                            <!-- Payment Methods Manager -->
+                            <div class="admin-card-box">
+                                <div class="card-box-header">
+                                    <h3><i class="fa-solid fa-credit-card text-yellow"></i> Saved Payment Methods</h3>
+                                    <button class="btn-classic-yellow btn-sm" onclick="openPaymentModal()"><i class="fa-solid fa-plus"></i> Add New</button>
+                                </div>
+                                <div id="buyerPaymentMethodsContainer" style="padding-top: 10px;">
+                                    <!-- Dynamic content -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Address Book Manager -->
+                        <div class="admin-card-box" style="margin-top: 30px;">
+                            <div class="card-box-header">
+                                <h3><i class="fa-solid fa-location-dot text-green"></i> Address Book Manager</h3>
+                                <button class="btn-classic-green btn-sm" onclick="openAddressModal()"><i class="fa-solid fa-plus"></i> Add New Address</button>
+                            </div>
+                            <div id="buyerAddressBookContainer" style="padding-top: 15px;">
+                                <!-- Dynamic address cards -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 2: ORDER HISTORY & TRACKING -->
+                    <div class="buyer-tab-content" id="buyerTabOrders" style="display: none;">
+                        <div class="admin-card-box">
+                            <div class="card-box-header">
+                                <h3><i class="fa-solid fa-receipt text-orange"></i> My Past & Active Orders</h3>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="admin-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Order #</th>
+                                            <th>Date</th>
+                                            <th>Items</th>
+                                            <th>Total Amount</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="buyerOrdersTableBody">
+                                        <!-- Dynamic rows -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 3: WISHLIST & PRICE TRACKER -->
+                    <div class="buyer-tab-content" id="buyerTabWishlist" style="display: none;">
+                        <div class="admin-card-box">
+                            <div class="card-box-header">
+                                <h3><i class="fa-solid fa-heart text-orange"></i> Favorite Items & Price Changes</h3>
+                            </div>
+                            <div id="buyerWishlistGridContainer" class="products-grid" style="margin-top: 20px;">
+                                <!-- Dynamic wishlist items with price drops -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 4: BROWSING HISTORY -->
+                    <div class="buyer-tab-content" id="buyerTabHistory" style="display: none;">
+                        <div class="admin-card-box">
+                            <div class="card-box-header">
+                                <h3><i class="fa-solid fa-clock-rotate-left text-yellow"></i> Recently Viewed Products</h3>
+                                <button class="btn-sm-link text-orange" onclick="clearBrowsingHistory()">Clear History</button>
+                            </div>
+                            <div id="buyerHistoryGridContainer" class="products-grid" style="margin-top: 20px;">
+                                <!-- Dynamic recently viewed items -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= PAGE 9: MY PROFILE & SECURITY ================= -->
+        <div class="page-view" id="profile-page">
+
+            <section style="padding: 60px 0 100px;">
+                <div class="section-container">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+                        <!-- Personal Info Card -->
+                        <div style="background: #FFF; border: 2px solid var(--border-color); border-radius: var(--radius-lg); padding: 32px;">
+                            <h3 style="font-family: var(--font-heading); margin-bottom: 8px;"><i class="fa-solid fa-user text-orange"></i> Personal Profile</h3>
+                            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px;">Update your profile photo, full name, and phone number.</p>
+                            <form id="profileUpdateForm">
+                                <!-- Profile Photo Upload Section -->
+                                <div class="profile-avatar-upload-box">
+                                    <div class="avatar-preview-container">
+                                        <img id="profileAvatarPreview" src="https://ui-avatars.com/api/?name=User&background=ff6b35&color=fff&bold=true" alt="Profile Avatar">
+                                        <label for="profileImageInput" title="Upload Photo" style="position: absolute; bottom: 0; right: 0; background: var(--orange-primary); color: #fff; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.2); font-size: 0.75rem;">
+                                            <i class="fa-solid fa-camera"></i>
+                                        </label>
+                                    </div>
+                                    <div style="flex: 1;">
+                                        <h4 style="font-size: 1rem; margin-bottom: 4px; font-weight: 700;">Profile Photo</h4>
+                                        <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 10px;">Upload a clean photo (JPG, PNG, WebP).</p>
+                                        <div style="display: flex; gap: 10px; align-items: center;">
+                                            <label for="profileImageInput" class="btn-classic-secondary" style="padding: 6px 14px; font-size: 0.82rem; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
+                                                <i class="fa-solid fa-cloud-arrow-up"></i> Choose Photo
+                                            </label>
+                                            <button type="button" id="btnRemoveAvatar" class="tbl-btn tbl-btn-delete" style="padding: 6px 12px; font-size: 0.82rem; display: none;">
+                                                <i class="fa-solid fa-trash"></i> Remove
+                                            </button>
+                                        </div>
+                                        <input type="file" id="profileImageInput" accept="image/*" style="display: none;">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Full Name *</label>
+                                    <input type="text" id="profileName" required placeholder="John Doe">
+                                </div>
+                                <div class="form-group">
+                                    <label>Email Address (Read Only)</label>
+                                    <input type="email" id="profileEmail" disabled style="background: var(--bg-secondary); opacity: 0.7;">
+                                </div>
+                                <div class="form-group">
+                                    <label>Role</label>
+                                    <input type="text" id="profileRole" disabled style="background: var(--bg-secondary); opacity: 0.7; font-weight: 700;">
+                                </div>
+                                <div class="form-group">
+                                    <label>Phone Number</label>
+                                    <input type="text" id="profilePhone" placeholder="+1 800-555-0100">
+                                </div>
+                                <button type="submit" class="btn-classic-orange full-width">Update Profile Information</button>
+                            </form>
+                        </div>
+
+                        <!-- Change Password Card -->
+                        <div style="background: #FFF; border: 2px solid var(--border-color); border-radius: var(--radius-lg); padding: 32px;">
+                            <h3 style="font-family: var(--font-heading); margin-bottom: 8px;"><i class="fa-solid fa-lock text-yellow"></i> Security & Password</h3>
+                            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px;">Ensure your account remains safe with a strong password.</p>
+                            <form id="changePasswordForm">
+                                <div class="form-group">
+                                    <label>Current Password *</label>
+                                    <div class="pw-input-wrapper">
+                                        <input type="password" id="changeOldPassword" required placeholder="••••••••">
+                                        <button type="button" class="pw-toggle-btn" aria-label="Toggle Password Visibility"><i class="fa-solid fa-eye"></i></button>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>New Password * (Min 8 chars, 1 uppercase, 1 number)</label>
+                                    <div class="pw-input-wrapper">
+                                        <input type="password" id="changeNewPassword" required placeholder="••••••••">
+                                        <button type="button" class="pw-toggle-btn" aria-label="Toggle Password Visibility"><i class="fa-solid fa-eye"></i></button>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn-classic-yellow full-width">Change Security Password</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= PAGE 10: FULL CART PAGE ================= -->
+        <div class="page-view" id="cart-page">
+
+
+            <section class="cart-full-section" style="padding: 50px 0 100px;">
+                <div class="section-container">
+                    <div id="fullCartContainer">
+                        <!-- Dynamically populated by script.js -->
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= PAGE 11: CHECKOUT PAGE ================= -->
+        <div class="page-view" id="checkout-page">
+
+
+            <section class="checkout-section" style="padding: 50px 0 100px;">
+                <div class="section-container">
+                    <div id="checkoutContainer">
+                        <!-- Dynamically populated by script.js -->
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= PAGE 12: ORDER SUCCESS PAGE ================= -->
+        <div class="page-view" id="order-success-page">
+            <section class="order-success-section" style="padding: 60px 0 120px;">
+                <div class="section-container">
+                    <div id="orderSuccessContainer">
+                        <!-- Dynamically populated by script.js -->
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= PAGE 13: MY ORDERS LIST PAGE ================= -->
+        <div class="page-view" id="orders-page">
+
+
+            <section class="orders-list-section" style="padding: 50px 0 100px;">
+                <div class="section-container">
+                    <div id="ordersListContainer">
+                        <!-- Dynamically populated by script.js -->
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= PAGE 14: ORDER DETAIL PAGE ================= -->
+        <div class="page-view" id="order-detail-page">
+            <section class="order-detail-section" style="padding: 40px 0 100px;">
+                <div class="section-container">
+                    <div id="orderDetailContainer">
+                        <!-- Dynamically populated by script.js -->
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= PAGE 16: WISHLIST PAGE ================= -->
+        <div class="page-view" id="wishlist-page">
+
+            <section style="padding: 50px 0 100px;">
+                <div class="section-container">
+                    <div id="wishlistPageContainer">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= PAGE 15: FULL LOGIN & REGISTER PAGE ================= -->
+        <div class="page-view" id="login-page">
+
+
+            <section class="login-full-section" style="padding: 50px 0 100px;">
+                <div class="section-container">
+                    <div class="login-card-full-wrapper" style="max-width: 650px; margin: 0 auto; background: #FFF; border: 2px solid var(--border-color); border-radius: var(--radius-lg); padding: 40px; box-shadow: var(--shadow-md);">
+                        <!-- Login / Register Tab Header -->
+                        <div class="login-tabs" style="display: flex; gap: 10px; margin-bottom: 30px; border-bottom: 2px solid var(--border-color); padding-bottom: 15px;">
+                            <button class="login-tab-btn active" id="tabLoginBtn" style="flex: 1; padding: 12px; font-size: 1rem; font-weight: 700;">Sign In to Account</button>
+                            <button class="login-tab-btn" id="tabRegisterBtn" style="flex: 1; padding: 12px; font-size: 1rem; font-weight: 700;">Create New Account</button>
+                        </div>
+
+                        <!-- Sign In Form -->
+                        <form class="login-form active" id="formSignIn">
+                            <h2>Sign In To ShopSphere</h2>
+                            <p style="color: var(--text-muted); margin-bottom: 24px;">Enter your email address and password to sign in.</p>
+                            
+                            <div class="form-group">
+                                <label for="loginEmail">Email Address *</label>
+                                <input type="email" id="loginEmail" placeholder="name@example.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="loginPassword">Password *</label>
+                                <div class="pw-input-wrapper">
+                                    <input type="password" id="loginPassword" placeholder="••••••••" required>
+                                    <button type="button" class="pw-toggle-btn" aria-label="Toggle Password Visibility"><i class="fa-solid fa-eye"></i></button>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-classic-orange full-width" id="btnSubmitLogin" style="height: 50px; font-size: 1.05rem; margin-top: 10px;">
+                                <span>Sign In To Account</span>
+                            </button>
+                        </form>
+
+                        <!-- Register Form -->
+                        <form class="login-form" id="formRegister">
+                            <h2>Create Your Account</h2>
+                            <p style="color: var(--text-muted); margin-bottom: 24px;">Join ShopSphere to get 20% off your first order or sell products as a Merchant.</p>
+
+                            <!-- Role Selector -->
+                            <div class="form-group">
+                                <label>Account Type *</label>
+                                <div class="role-selector-stitch">
+                                    <label class="role-option active">
+                                        <input type="radio" name="registerRole" value="BUYER" checked>
+                                        <i class="fa-solid fa-bag-shopping"></i>
+                                        <span>Shopper / Buyer</span>
+                                    </label>
+                                    <label class="role-option">
+                                        <input type="radio" name="registerRole" value="SELLER">
+                                        <i class="fa-solid fa-store"></i>
+                                        <span>Merchant / Seller</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="regName">Full Name *</label>
+                                <input type="text" id="regName" placeholder="John Doe" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="regEmail">Email Address *</label>
+                                <input type="email" id="regEmail" placeholder="name@example.com" required>
+                            </div>
+
+                            <!-- SELLER SPECIFIC EXTRA FIELDS -->
+                            <div id="sellerExtraFields" style="display: none; background: var(--bg-warm-cream); padding: 20px; border-radius: var(--radius-md); border: 2px dashed var(--orange-primary); margin-bottom: 20px;">
+                                <h4 style="font-family: var(--font-heading); color: var(--orange-primary); margin-bottom: 12px;"><i class="fa-solid fa-store"></i> Seller Store & Business Details</h4>
+                                <div class="form-group">
+                                    <label for="regStoreName">Store / Business Name *</label>
+                                    <input type="text" id="regStoreName" placeholder="e.g. Apex Tech Retailers">
+                                </div>
+                                <div class="form-group">
+                                    <label for="regGstNumber">GSTIN Number (GST No.) *</label>
+                                    <input type="text" id="regGstNumber" placeholder="e.g. 22AAAAA0000A1Z5" style="text-transform: uppercase;">
+                                </div>
+                                <div class="form-group">
+                                    <label for="regSellingCategory">Primary Selling Category *</label>
+                                    <select id="regSellingCategory" style="width: 100%; padding: 12px; border-radius: var(--radius-md); border: 2px solid var(--border-color);">
+                                        <option value="Tech & Gadgets">Tech & Gadgets</option>
+                                        <option value="Fashion & Apparel">Fashion & Apparel</option>
+                                        <option value="Home & Living">Home & Living</option>
+                                        <option value="Beauty & Care">Beauty & Care</option>
+                                        <option value="Sports & Travel">Sports & Travel</option>
+                                    </select>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 0;">
+                                    <label for="regProductDetails">What products will you sell & how? *</label>
+                                    <textarea id="regProductDetails" rows="2" placeholder="Briefly describe the products you plan to list and sell..."></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="regPhone">Phone Number *</label>
+                                <input type="text" id="regPhone" placeholder="+91 9876543210" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="regPassword">Create Password * (Min 8 chars, 1 uppercase, 1 number)</label>
+                                <div class="pw-input-wrapper">
+                                    <input type="password" id="regPassword" placeholder="••••••••" required>
+                                    <button type="button" class="pw-toggle-btn" aria-label="Toggle Password Visibility"><i class="fa-solid fa-eye"></i></button>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-classic-yellow full-width" id="btnSubmitRegister" style="height: 50px; font-size: 1.05rem;">
+                                <span>Create Account Now</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- ================= INTERACTIVE MODALS & DRAWERS ================= -->
+
+    <!-- CART SIDE DRAWER -->
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-drawer-header">
+            <div class="cart-title">
+                <i class="fa-solid fa-bag-shopping text-orange"></i>
+                <span>Your Shopping Cart</span>
+                <span class="cart-items-tag" id="cartDrawerCount">0 items</span>
+            </div>
+            <button class="cart-close" id="cartClose"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <div class="cart-free-shipping-bar">
+            <div class="shipping-bar-text" id="shippingProgressText">Add <strong>₹999</strong> more for Free Delivery!</div>
+            <div class="shipping-progress-track">
+                <div class="shipping-progress-fill" id="shippingProgressFill" style="width: 0%;"></div>
+            </div>
+        </div>
+
+        <div class="cart-drawer-body" id="cartDrawerItems">
+            <!-- Populated by JS -->
+        </div>
+
+        <!-- Cart Drawer Coupon Section -->
+        <div class="cart-drawer-coupon-box" id="cartDrawerCouponBox" style="padding: 14px 20px; border-top: 1px dashed var(--border-color); background: var(--bg-warm-cream);">
+            <!-- Populated by JS -->
+        </div>
+
+        <div class="cart-drawer-footer" id="cartDrawerFooter">
+            <div class="cart-summary-row">
+                <span>Subtotal</span>
+                <span class="summary-amount" id="cartSubtotal">₹0</span>
+            </div>
+            <div class="cart-summary-row" id="cartCouponRow" style="display: none; color: var(--green-primary); font-weight: 700;">
+                <span>Coupon Discount</span>
+                <span class="summary-amount" id="cartCouponDiscount">-₹0</span>
+            </div>
+            <div class="cart-summary-row">
+                <span>Est. Tax (18% GST)</span>
+                <span class="summary-amount" id="cartTax">₹0</span>
+            </div>
+            <div class="cart-summary-row">
+                <span>Delivery Fee</span>
+                <span class="summary-amount" id="cartDelivery">₹0</span>
+            </div>
+            <div class="cart-summary-row total-row">
+                <span>Total Amount</span>
+                <span class="summary-amount total-price" id="cartTotal">₹0</span>
+            </div>
+            <div style="display: flex; gap: 10px; margin-top: 14px;">
+                <a href="#cart-page" class="btn-outline-classic" data-page="cart" style="flex: 1; text-align: center; justify-content: center; height: 46px;">
+                    Full Cart
+                </a>
+                <button class="btn-classic-orange btn-checkout" id="checkoutBtn" style="flex: 2; height: 46px; justify-content: center;">
+                    <span>Checkout</span> <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="modal-backdrop" id="cartBackdrop"></div>
+
+    <!-- BUYER ADDRESS MODAL -->
+    <div class="admin-modal" id="buyerAddressModal">
+        <div class="admin-modal-box">
+            <div class="modal-box-header">
+                <h3 id="buyerAddressModalTitle"><i class="fa-solid fa-location-dot text-green"></i> Add Delivery Address</h3>
+                <button class="modal-close" onclick="closeAddressModal()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="buyerAddressForm">
+                <input type="hidden" id="addressId">
+                <div class="form-group">
+                    <label>Full Name *</label>
+                    <input type="text" id="addrFullName" required placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label>Phone Number *</label>
+                    <input type="text" id="addrPhone" required placeholder="+91 9876543210">
+                </div>
+                <div class="form-group">
+                    <label>Address Line 1 *</label>
+                    <input type="text" id="addrLine1" required placeholder="Flat / House No., Street, Landmark">
+                </div>
+                <div class="form-group">
+                    <label>City & State *</label>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <input type="text" id="addrCity" required placeholder="City (e.g., Mumbai)">
+                        <input type="text" id="addrState" required placeholder="State (e.g., Maharashtra)">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Pincode / ZIP Code *</label>
+                    <input type="text" id="addrPincode" required placeholder="400001">
+                </div>
+                <div class="form-group">
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                        <input type="checkbox" id="addrDefault"> Make this my default shipping address
+                    </label>
+                </div>
+                <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;">
+                    <button type="button" class="btn-classic-secondary" onclick="closeAddressModal()">Cancel</button>
+                    <button type="submit" class="btn-classic-green">Save Address</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="admin-modal-backdrop" id="buyerAddressBackdrop"></div>
+
+    <!-- BUYER PAYMENT METHOD MODAL -->
+    <div class="admin-modal" id="buyerPaymentModal">
+        <div class="admin-modal-box">
+            <div class="modal-box-header">
+                <h3><i class="fa-solid fa-credit-card text-yellow"></i> Add Payment Method</h3>
+                <button class="modal-close" onclick="closePaymentModal()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="buyerPaymentForm">
+                <div class="form-group">
+                    <label>Payment Method Type</label>
+                    <select id="payMethodType" required class="form-control" style="width: 100%; padding: 10px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+                        <option value="CARD">Credit / Debit Card</option>
+                        <option value="UPI">UPI ID (Google Pay / PhonePe / Paytm)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Card / UPI Holder Name *</label>
+                    <input type="text" id="payHolderName" required placeholder="Name on Card or UPI">
+                </div>
+                <div class="form-group">
+                    <label>Card Number / UPI Handle *</label>
+                    <input type="text" id="payNumber" required placeholder="XXXX-XXXX-XXXX-1234 or username@upi">
+                </div>
+                <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;">
+                    <button type="button" class="btn-classic-secondary" onclick="closePaymentModal()">Cancel</button>
+                    <button type="submit" class="btn-classic-yellow">Save Payment Method</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="admin-modal-backdrop" id="buyerPaymentBackdrop"></div>
+
+    <!-- FOOTER SECTION -->
+    <footer class="main-footer">
+        <div class="section-container">
+            <div class="footer-grid">
+                <div class="footer-col brand-col">
+                    <a href="#home-page" class="brand-logo" data-page="home">
+                        <div class="logo-icon-box"><i class="fa-solid fa-bag-shopping"></i></div>
+                        <span class="logo-title logo-title-footer">Shop<span class="logo-orange">Sphere</span></span>
+                    </a>
+                    <p>Your premier online store delivering classic quality, trusted brands, and fast worldwide shipping.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" aria-label="Pinterest"><i class="fa-brands fa-pinterest"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home-page" data-page="home">Home</a></li>
+                        <li><a href="#products-page" data-page="products">All Products</a></li>
+                        <li><a href="#categories-page" data-page="categories">Departments</a></li>
+                        <li><a href="#about-page" data-page="about">About Us</a></li>
+                        <li><a href="#contact-page" data-page="contact">Contact Support</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Customer Care</h4>
+                    <ul>
+                        <li><a href="#orders-page" data-page="orders">Track Order Status</a></li>
+                        <li><a href="#">Shipping & Delivery Policy</a></li>
+                        <li><a href="#">Returns & Refunds</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col newsletter-col">
+                    <h4>Join Our Newsletter</h4>
+                    <p>Subscribe to get special discount offers, free giveaways, and once-in-a-lifetime deals.</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" placeholder="Enter your email address" required>
+                        <button type="submit" class="btn-classic-orange" aria-label="Subscribe"><i class="fa-solid fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 ShopSphere Classic Inc. All Rights Reserved.</p>
+                <div class="payment-methods">
+                    <i class="fa-brands fa-cc-visa" title="Visa"></i>
+                    <i class="fa-brands fa-cc-mastercard" title="Mastercard"></i>
+                    <i class="fa-brands fa-cc-paypal" title="PayPal"></i>
+                    <i class="fa-brands fa-cc-apple-pay" title="Apple Pay"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ADMIN USER MODAL (ADD / EDIT USER) -->
+    <div class="modal-dialog" id="adminUserModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="adminUserModalTitle"><i class="fa-solid fa-user-gear text-orange"></i> Manage User Account</h3>
+                <button class="modal-close" id="adminUserModalClose"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body" style="padding: 24px;">
+                <form id="adminUserForm">
+                    <input type="hidden" id="adminUserId">
+                    <div class="form-group">
+                        <label>Full Name *</label>
+                        <input type="text" id="adminUserName" required placeholder="User full name">
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address *</label>
+                        <input type="email" id="adminUserEmail" required placeholder="user@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="text" id="adminUserPhone" placeholder="+91 9876543210">
+                    </div>
+                    <div class="form-group">
+                        <label>Account Role *</label>
+                        <select id="adminUserRole" required style="width: 100%; padding: 12px; border-radius: var(--radius-md); border: 2px solid var(--border-color);">
+                            <option value="BUYER">BUYER (Customer)</option>
+                            <option value="SELLER">SELLER (Merchant)</option>
+                            <option value="ADMIN">ADMIN (System Administrator)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select id="adminUserActive" style="width: 100%; padding: 12px; border-radius: var(--radius-md); border: 2px solid var(--border-color);">
+                            <option value="true">Active Account</option>
+                            <option value="false">Blocked / Suspended</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-classic-orange full-width" style="margin-top: 10px;">Save User Account</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal-backdrop" id="adminUserBackdrop"></div>
+
+    <!-- ADMIN PRODUCT MODAL (ADD / EDIT PRODUCT) -->
+    <div class="modal-dialog" id="adminProductModal">
+        <div class="modal-content" style="max-width: 650px;">
+            <div class="modal-header">
+                <h3 id="adminProductModalTitle"><i class="fa-solid fa-box-open text-orange"></i> Manage Product Listing</h3>
+                <button class="modal-close" id="adminProductModalClose"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body" style="padding: 24px;">
+                <form id="adminProductForm">
+                    <input type="hidden" id="adminProductId">
+                    <div class="form-group">
+                        <label>Product Title *</label>
+                        <input type="text" id="adminProdName" required placeholder="e.g. Wireless ANC Headphones">
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div class="form-group">
+                            <label>Category *</label>
+                            <select id="adminProdCategory" required style="width: 100%; padding: 12px; border-radius: var(--radius-md); border: 2px solid var(--border-color);">
+                                <option value="Tech & Gadgets">Tech & Gadgets</option>
+                                <option value="Fashion & Apparel">Fashion & Apparel</option>
+                                <option value="Home & Living">Home & Living</option>
+                                <option value="Beauty & Care">Beauty & Care</option>
+                                <option value="Sports & Travel">Sports & Travel</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Stock Quantity *</label>
+                            <input type="number" id="adminProdStock" required min="0" value="15">
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div class="form-group">
+                            <label>Current Price (INR ₹) *</label>
+                            <input type="number" id="adminProdPrice" step="0.01" required placeholder="12999">
+                        </div>
+                        <div class="form-group">
+                            <label>Original Price (Old Price ₹)</label>
+                            <input type="number" id="adminProdOldPrice" step="0.01" placeholder="15999">
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <label style="font-weight: 700; margin-bottom: 0;">
+                                <i class="fa-solid fa-images text-orange"></i> Product Photos (Up to 7 Photos, 1 Compulsory) *
+                            </label>
+                            <span id="prodPhotoCountBadge" style="font-size: 0.75rem; background: var(--bg-warm-cream); color: var(--orange-primary); font-weight: 700; padding: 2px 8px; border-radius: 12px; border: 1px solid var(--orange-primary);">0 / 7 Added</span>
+                        </div>
+                        
+                        <!-- Upload Dropzone -->
+                        <div class="product-photo-dropzone" id="prodPhotoDropzone" style="border: 2px dashed var(--orange-primary); background: var(--bg-warm-cream); padding: 18px; border-radius: var(--radius-md); text-align: center; cursor: pointer; transition: all 0.2s ease; margin-bottom: 12px;">
+                            <i class="fa-solid fa-cloud-arrow-up" style="font-size: 1.8rem; color: var(--orange-primary); margin-bottom: 6px;"></i>
+                            <div style="font-weight: 700; font-size: 0.92rem; color: var(--text-dark);">Click or Drag & Drop to Upload Photos</div>
+                            <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">Upload up to 7 photos. First photo will be the main Cover Photo (Compulsory).</div>
+                            <input type="file" id="adminProdPhotoFileInput" accept="image/*" multiple style="display: none;">
+                        </div>
+
+                        <!-- 7 Photo Slots Grid -->
+                        <div id="adminProdPhotosGrid" style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; margin-bottom: 10px;">
+                            <!-- Populated dynamically via renderProductPhotoSlots() in script.js -->
+                        </div>
+
+                        <!-- Optional URL Paste Toggle for external images -->
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 6px;">
+                            <button type="button" id="btnToggleImageUrl" style="background: none; border: none; color: var(--orange-primary); font-size: 0.78rem; font-weight: 600; cursor: pointer; padding: 0; text-decoration: underline;">
+                                <i class="fa-solid fa-link"></i> Or add via Image URL
+                            </button>
+                            <span style="font-size: 0.72rem; color: var(--text-muted);"><i class="fa-solid fa-circle-info"></i> 1 Photo is compulsory</span>
+                        </div>
+
+                        <div id="imageUrlBox" style="display: none; margin-top: 8px;">
+                            <div style="display: flex; gap: 8px;">
+                                <input type="url" id="adminProdUrlInput" placeholder="https://images.unsplash.com/..." style="flex: 1; padding: 8px 12px; font-size: 0.85rem; border: 1px solid var(--border-color); border-radius: var(--radius-sm);">
+                                <button type="button" id="btnAddImageUrlBtn" class="btn-classic-secondary" style="padding: 8px 14px; font-size: 0.82rem; white-space: nowrap;">Add URL</button>
+                            </div>
+                        </div>
+
+                        <!-- Hidden input keeping backward compatibility for validation / fallback -->
+                        <input type="hidden" id="adminProdImage">
+                    </div>
+                    <div class="form-group">
+                        <label>Description *</label>
+                        <textarea id="adminProdDescription" rows="3" required placeholder="Product features and highlights..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-classic-orange full-width">Save Product Details</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal-backdrop" id="adminProductBackdrop"></div>
+
+    <!-- CENTRAL REST API CLIENT, AUTH STORE, SERVICES & APPLICATION ENGINE -->
+    <script src="api.js"></script>
+    <script src="auth.js"></script>
+    <script src="data.js"></script>
+    <script src="services/productService.js"></script>
+    <script src="services/couponService.js"></script>
+    <script src="services/cartService.js"></script>
+    <script src="services/orderService.js"></script>
+    <script src="services/adminService.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
