@@ -134,5 +134,57 @@ shopsphere/
 
 ---
 
+## 🎓 Evaluation & Rubric Compliance (Review 1 & Hackathon Guidelines)
+
+This project strictly satisfies all requirements outlined in the evaluation rubric for Java Web & Enterprise Applications:
+
+### 1. Core Java Concepts & OOP Implementation (Polymorphism, Inheritance, Exception Handling, Interfaces)
+- **Interfaces**: Service interfaces (`AuthService`, `ProductService`, `OrderService`, `CartService`) and core component contracts (`BaseDao`, `ProductDao`, `UserDao`, `PaymentProcessor`).
+- **Inheritance**: 
+  - `BasePaymentProcessor` extended by `CardPaymentProcessor`, `UpiPaymentProcessor`, and `CodPaymentProcessor`.
+  - Base custom exception `ShopSphereException` extended by domain-specific exceptions.
+- **Polymorphism**:
+  - Runtime polymorphic dispatch implemented via `PaymentProcessorFactory` and `PaymentProcessor` implementations.
+- **Exception Handling**:
+  - Structured hierarchy: `ShopSphereException`, `ResourceNotFoundException`, `BadRequestException`, `DuplicateResourceException`, `InsufficientStockException`.
+  - Centralized global error translation via `GlobalExceptionHandler` (`@RestControllerAdvice`).
+- **Collections & Generics**:
+  - Extensive usage of generics: `ApiResponse<T>`, `BaseDao<T, ID>`, `List<T>`, `Set<T>`, `Map<K, V>`, `EnumMap`.
+
+### 2. Multithreading & Synchronization
+- **Thread Pool Management**: Configured via `AsyncConfig` with custom `ThreadPoolTaskExecutor` (named worker pool `ShopSphere-Worker-`).
+- **Asynchronous Processing**: `AsyncNotificationService` executing order confirmation and communication tasks in background worker threads using `@Async` and `CompletableFuture<Boolean>`.
+- **Synchronization**: `ThreadSafeInventoryManager` utilizing:
+  - `synchronized` methods/critical sections to eliminate race conditions during concurrent stock reservations.
+  - `ReentrantLock` for fine-grained explicit lock acquisition and release.
+  - `ConcurrentHashMap` for high-throughput, thread-safe memory caching.
+
+### 3. Database Operations & JDBC Connectivity (JDBC DAO Layer)
+- **Direct JDBC Connection**: `DatabaseConnection.java` manages direct connection instances via `com.mysql.cj.jdbc.Driver` using `DriverManager.getConnection()`.
+- **Dedicated DAO Layer**:
+  - `BaseDao<T, ID>`: Generic DAO interface.
+  - `ProductDao` & `ProductDaoImpl`: Pure JDBC queries using `PreparedStatement`, `ResultSet`, and `Statement`.
+  - `UserDao` & `UserDaoImpl`: Pure JDBC operations with SQL injection prevention via parameterized queries.
+- **ORM / Spring Data JPA**: 11 `JpaRepository` interfaces handling high-level relational mapping alongside the low-level JDBC DAO layer.
+- **Relational Schema**: 15 normalized tables defined in `schema.sql` with primary keys, foreign key constraints (`ON DELETE CASCADE`), and indexes.
+
+### 4. Servlets & Web Integration
+- **Java Servlets**: `AppDiagnosticsServlet` directly extends `jakarta.servlet.http.HttpServlet`, handling `doGet()` and `doPost()` lifecycle methods and writing raw JSON responses via `PrintWriter`.
+- **Servlet Filters**: 
+  - `RequestPerformanceFilter` implements `jakarta.servlet.Filter` (`init`, `doFilter`, `destroy`) for HTTP latency profiling and header injection.
+  - `JwtAuthenticationFilter` intercepts requests to enforce token security.
+- **Servlet Registration**: Configured explicitly in Spring Boot via `ServletRegistrationConfig` (`ServletRegistrationBean` and `FilterRegistrationBean`).
+- **REST Web Layer**: 8 REST Controllers handling standard HTTP verbs (GET, POST, PUT, DELETE) with `ResponseEntity` and DTO mapping.
+
+### 5. Live Diagnostics & Demonstration Endpoints
+The following public endpoints are available to verify core implementations:
+- **Servlet Verification**: `GET http://localhost:8080/api/diagnostics/servlet`
+- **Direct JDBC DAO Verification**: `GET http://localhost:8080/api/diagnostics/jdbc`
+- **Polymorphism Demonstration**: `POST http://localhost:8080/api/diagnostics/payment-polymorphism?method=UPI&amount=1499`
+- **Concurrency & Synchronization Demonstration**: `POST http://localhost:8080/api/diagnostics/concurrency-test?productId=1&totalConcurrentOrders=20`
+- **Multithreading Asynchronous Verification**: `POST http://localhost:8080/api/diagnostics/async-notification?email=reviewer@example.com`
+
+---
+
 ## 📄 License
 This project is open-source and available under the **ISC License**.
